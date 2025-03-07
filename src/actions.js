@@ -18,27 +18,33 @@ export const getUsersSuccess = (payload) => ({
   payload,
 });
 
-export const postUser = (userData) => ({
+// For better clarity, we can make payload more clearly
+// export const getUsersSuccess = (users) => ({
+//   type: GET_USERS_SUCCESS,
+//   payload: users
+// });
+
+export const postUser = (payload) => ({
   type: POST_USER,
-  payload: userData,
+  payload
 });
 
-export const postUserSuccess = (newUser) => ({
+export const postUserSuccess = (payload) => ({
   type: POST_USER_SUCCESS,
-  payload: newUser,
+  payload
 });
 
-export const deleteUser = (userId) => ({
+export const deleteUser = (payload) => ({
   type: DELETE_USER,
-  payload: userId,
+  payload
 });
 
-export const deleteUserSuccess = (userId) => ({
+export const deleteUserSuccess = (payload) => ({
   type: DELETE_USER_SUCCESS,
-  payload: userId,
+  payload
 });
 
-export const getFilteredUsers = (filteredUsers) => ({
+export const getFilteredUsers = (payload) => ({
   type: FILTER_USERS,
-  payload: filteredUsers
+  payload
 })

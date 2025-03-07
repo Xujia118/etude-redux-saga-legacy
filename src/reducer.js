@@ -23,6 +23,7 @@ const myFirstReducer = (state = initialState, action) => {
       return {
         ...state,
         originalUsers: [...state.originalUsers, action.payload], // Append the new user
+        filteredUsers: [...state.filteredUsers, action.payload],
       };
     }
     case DELETE_USER_SUCCESS: {
@@ -31,6 +32,9 @@ const myFirstReducer = (state = initialState, action) => {
         originalUsers: state.originalUsers.filter(
           (user) => user.id !== action.payload
         ), // Remove the deleted user
+        filteredUsers: state.filteredUsers.filter(
+          (user) => user.id !== action.payload
+        ),
       };
     }
     case FILTER_USERS: {

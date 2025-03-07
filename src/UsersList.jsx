@@ -96,6 +96,7 @@ function UsersList() {
           </tr>
         </thead>
         <tbody>
+          {/* Render with filtered users */}
           {filteredUsers.map((user) => (
             <tr key={user.id}>
               <td>{user.username}</td>
@@ -109,16 +110,6 @@ function UsersList() {
           ))}
         </tbody>
       </table>
-
-      {/* <select name="local-user" onChange={handleChange}>
-        {users.map((user) => (
-          <option key={user.id} value={user.username}>
-            {user.username}
-          </option>
-        ))}
-      </select> */}
-      {/* <button onClick={handleClick}>Select User</button> */}
-
       <form onSubmit={handleSumbit}>
         <input
           type="text"
