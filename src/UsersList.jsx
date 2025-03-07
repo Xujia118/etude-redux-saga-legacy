@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers, deleteUser, postUser, filterByGender } from "./actions";
+import { getUsers, deleteUser, postUser, getFilteredUsers } from "./actions";
+import { filterUsers } from "./utils";
 
 function UsersList() {
-  const filteredUsers = useSelector(state => state.myFirstReducer.filteredUsers)
+  const { originalUsers, filteredUsers } = useSelector((state) => state.myFirstReducer);
   const dispatch = useDispatch();
 
   const [localUser, setLocalUser] = useState({
     username: "",
     email: "",
+  });
+
+  const [filters, setFilters] = useState({
+    gender: "",
+    age: "",
   });
 
   function handleChange(e) {
@@ -32,14 +38,26 @@ function UsersList() {
     });
   }
 
-  function handleSelect(e) {
-    const gender = e.target.value;
-    dispatch(filterByGender(gender));
+  function handleFilterChange(e) {
+    const { name, value } = e.target;
+    setFilters((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  }
+
+  function applyFilters() {
+    const filteredUsers = filterUsers(originalUsers, filters);
+    dispatch(getFilteredUsers(filteredUsers));
   }
 
   useEffect(() => {
     dispatch(getUsers());
   }, [dispatch]);
+
+  useEffect(() => {
+    applyFilters();
+  }, [filters]);
 
   return (
     <div>
@@ -51,13 +69,29 @@ function UsersList() {
             <th>Email</th>
             <th>
               Gender
-              <select name="gender-filter" onChange={handleSelect}>
+              <select
+                name="gender"
+                value={filters.gender}
+                onChange={handleFilterChange}
+              >
                 <option value="">All</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
               </select>
             </th>
-            <th>Age</th>
+            <th>
+              Age
+              <select
+                name="age"
+                value={filters.age}
+                onChange={handleFilterChange}
+              >
+                <option value="">All</option>
+                <option value="18-25">18-25</option>
+                <option value="26-35">26-35</option>
+                <option value="36+">36+</option>
+              </select>
+            </th>
             <th>Action</th>
           </tr>
         </thead>

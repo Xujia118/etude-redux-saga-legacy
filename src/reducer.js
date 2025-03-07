@@ -2,7 +2,7 @@ import {
   GET_USERS_SUCCESS,
   POST_USER_SUCCESS,
   DELETE_USER_SUCCESS,
-  FILTER_BY_GENDER,
+  FILTER_USERS,
 } from "./actions";
 
 const initialState = {
@@ -33,12 +33,10 @@ const myFirstReducer = (state = initialState, action) => {
         ), // Remove the deleted user
       };
     }
-    case FILTER_BY_GENDER: {
+    case FILTER_USERS: {
       return {
         ...state,
-        filteredUsers: state.originalUsers.filter(
-          (user) => action.payload === "" || user.gender === action.payload
-        ),
+        filteredUsers: action.payload,
       };
     }
     default:

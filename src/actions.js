@@ -6,7 +6,7 @@ export const POST_USER_SUCCESS = "POST_USER_SUCCESS";
 export const DELETE_USER = "DELETE_USER";
 export const DELETE_USER_SUCCESS = "DELETE_USER_SUCCESS";
 export const FILTER_BY_GENDER = "FILTER_BY_GENDER";
-export const FILTER_BY_AGE = "FILTER_BY_AGE";
+export const FILTER_USERS = "FILTER_USERS";
 
 // Action Creators
 export const getUsers = () => ({
@@ -38,7 +38,7 @@ export const deleteUserSuccess = (userId) => ({
   payload: userId,
 });
 
-export const filterByGender = (gender) => ({
-  type: FILTER_BY_GENDER,
-  payload: gender
+export const getFilteredUsers = (filteredUsers) => ({
+  type: FILTER_USERS,
+  payload: filteredUsers
 })
