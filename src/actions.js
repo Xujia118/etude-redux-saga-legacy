@@ -1,6 +1,7 @@
 // Action Types
 export const GET_USERS = "GET_USERS";
 export const GET_USERS_SUCCESS = "GET_USERS_SUCCESS";
+export const GET_USERS_FAILURE = "GET_USERS_FAILURE";
 export const POST_USER = "POST_USER";
 export const POST_USER_SUCCESS = "POST_USER_SUCCESS";
 export const DELETE_USER = "DELETE_USER";
@@ -15,6 +16,11 @@ export const getUsers = () => ({
 
 export const getUsersSuccess = (payload) => ({
   type: GET_USERS_SUCCESS,
+  payload,
+});
+
+export const getUsersFailure = (payload) => ({
+  type: GET_USERS_FAILURE,
   payload,
 });
 

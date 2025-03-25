@@ -1,5 +1,7 @@
 import {
+  GET_USERS,
   GET_USERS_SUCCESS,
+  GET_USERS_FAILURE,
   POST_USER_SUCCESS,
   DELETE_USER_SUCCESS,
   FILTER_USERS,
@@ -8,15 +10,32 @@ import {
 const initialState = {
   originalUsers: [],
   filteredUsers: [],
+  isLoading: false,
+  error: null,
 };
 
 const myFirstReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GET_USERS: {
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    }
     case GET_USERS_SUCCESS: {
       return {
         ...state,
         originalUsers: action.payload,
         filteredUsers: action.payload,
+        isLoading: false,
+      };
+    }
+    case GET_USERS_FAILURE: {
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
       };
     }
     case POST_USER_SUCCESS: {

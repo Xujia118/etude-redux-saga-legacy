@@ -4,7 +4,7 @@ import { getUsers, deleteUser, postUser, getFilteredUsers } from "./actions";
 import { filterUsers } from "./utils";
 
 function UsersList() {
-  const { originalUsers, filteredUsers } = useSelector((state) => state.myFirstReducer);
+  const { originalUsers, filteredUsers, isLoading, error } = useSelector((state) => state.myFirstReducer);
   const dispatch = useDispatch();
 
   const [localUser, setLocalUser] = useState({
@@ -59,6 +59,10 @@ function UsersList() {
     applyFilters();
   }, [filters]);
 
+  if (isLoading) {
+    return <div className="loading-spinner">Loading users...</div>;
+  }
+
   return (
     <div>
       <h1>UsersList</h1>
@@ -69,11 +73,7 @@ function UsersList() {
             <th>Email</th>
             <th>
               Gender
-              <select
-                name="gender"
-                value={filters.gender}
-                onChange={handleFilterChange}
-              >
+              <select name="gender" value={filters.gender} onChange={handleFilterChange}>
                 <option value="">All</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
@@ -81,11 +81,7 @@ function UsersList() {
             </th>
             <th>
               Age
-              <select
-                name="age"
-                value={filters.age}
-                onChange={handleFilterChange}
-              >
+              <select name="age" value={filters.age} onChange={handleFilterChange}>
                 <option value="">All</option>
                 <option value="18-25">18-25</option>
                 <option value="26-35">26-35</option>
@@ -118,13 +114,7 @@ function UsersList() {
           placeholder="Username..."
           onChange={handleChange}
         />
-        <input
-          type="text"
-          name="email"
-          value={localUser.email}
-          placeholder="Email..."
-          onChange={handleChange}
-        />
+        <input type="text" name="email" value={localUser.email} placeholder="Email..." onChange={handleChange} />
         <button type="submit">Add</button>
       </form>
     </div>
